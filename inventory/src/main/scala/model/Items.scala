@@ -6,7 +6,7 @@ class Items(
              val price: Double,
              val quantity: Int,
              val category: String
-           ) {
+           ) extends Ordered[Items] {
 
   def updateAttribute(attribute: String, newValue: String): Items = {
     attribute match {

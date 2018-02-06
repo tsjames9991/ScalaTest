@@ -3,16 +3,13 @@ import scala.io.StdIn
 
 class EntryPoint {
   val Log = Logger.getLogger(this.getClass)
-  case class Person extends Accounts {
+  class Item extends Inventory {
     def customerModule(): Unit = {
       Log.info(s"\nEnter Choice :\n1. Search Item\n2. Get Detailed Description\n3. Buy Items")
       Log.info(s"\nYour Choice : ")
       val choice = StdIn.readInt()
       choice match {
-        case 1 =>
-          Log.info(s"\nEnter Choice :\n1. Search By Category\n2. Search By Vendor\n3. Search By ID")
-          Log.info(s"\nYour Choice : ")
-          searchChoice(StdIn.readInt, database)
+        case 1 => search(database)
 
         case 2 =>
           Log.info(s"\nCategory : ")
@@ -27,6 +24,7 @@ class EntryPoint {
     }
   }
 
+  class PersonAccounts extends Accounts
   def inventoryModule(): Unit = {
     Log.info(s"\nEnter Vendor ID : ")
     val id = StdIn.readInt()

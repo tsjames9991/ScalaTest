@@ -2,10 +2,8 @@ package model
 
 import org.apache.log4j.Logger
 import java.io.{File, PrintWriter}
-
 import org.json4s.DefaultFormats
 import org.json4s.jackson.Serialization._
-
 import scala.io.{Source, StdIn}
 
 class Database {
@@ -40,7 +38,7 @@ class Database {
     }
   }
 
-  private def searchItem(query: Map[String, String]): List[Items] = {
+  def searchItem(query: Map[String, String]): List[Items] = {
     val category: String = query.getOrElse("category", " ")
     val id: Int = query.getOrElse("id", "0").toInt
     val categoryResult: List[Items] = itemList.filter((entry: Items) => entry.category == category)

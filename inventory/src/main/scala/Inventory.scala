@@ -2,9 +2,7 @@ import model._
 import org.apache.log4j.Logger
 import scala.io.StdIn
 
-object Inventory {
-
-
+class Inventory {
   val Log = Logger.getLogger(this.getClass)
   val database: Database = new Database()
 
@@ -29,8 +27,8 @@ object Inventory {
     database.addToList(newItem)
   }
 
-  def search(database: Database): Unit = {
-    Log.info(s"\nEnter Choice :\n1. Search By Category\n2. Search By Vendor\n3. Search By ID")
+  def search(database: Database): List[Items] = {
+    Log.info(s"\nEnter Choice :\n1. Search By Category\n2. Search By ID")
     Log.info(s"\nYour Choice : ")
     database.searchChoice(StdIn.readInt)
   }

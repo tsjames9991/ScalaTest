@@ -17,9 +17,9 @@ class Database {
   }
 
   def updateList(person: Person): Boolean = {
-    val personList: List[Person] = personList.filter(_.mobile != person.mobile)
-    val updatedList = personList :+ person
-    Database.writeToJSON(updatedList)
+    val updatedList: List[Person] = personList.filter(_.mobile != person.mobile)
+    val newList = updatedList :+ person
+    Database.writeToJSON(newList)
   }
 }
 
