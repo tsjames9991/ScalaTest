@@ -25,5 +25,3 @@ class Items(
 
   override def toString: String = s"  $id  |  $vendorId  |  $name  |  $price  |  $quantity  | $category"
 }
-
-
