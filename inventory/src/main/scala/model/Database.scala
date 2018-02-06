@@ -4,7 +4,6 @@ import org.apache.log4j.Logger
 import java.io.{File, PrintWriter}
 import org.json4s.DefaultFormats
 import org.json4s.jackson.Serialization._
-
 import scala.io.Source
 
 class Database {
@@ -21,7 +20,7 @@ class Database {
   }
 
   def addToList(commodity: Items): Boolean = {
-        if (itemList.contains(commodity)) true else Database.writeToJSON(itemList :+ commodity, "items.json")
+    if (itemList.contains(commodity)) true else Database.writeToJSON(itemList :+ commodity)
   }
 
   def updateQuantities(itemsBought: List[Items]): Boolean = {
@@ -30,7 +29,7 @@ class Database {
       itemInDatabase <- itemList
       if purchased.id == itemInDatabase.id
     } yield itemInDatabase.updateAttribute("quantity", (itemInDatabase.quantity - 1).toString)
-    Database.writeToJSON(updatedList, "items.json")
+    Database.writeToJSON(updatedList)
   }
 
   def sortBy(attribute: String, itemList: List[Items], direction: String): List[Items] = {
@@ -49,11 +48,11 @@ object Database {
   val List: List[Items] = readFromJSON("items.json")
   val Obj: Database = new Database()
 
-  def writeToJSON(inventory: List[Items], fileName: String): Boolean = {
+  def writeToJSON(inventory: List[Items]): Boolean = {
     try {
       implicit def formats: DefaultFormats = DefaultFormats
 
-      val writer = new PrintWriter(new File(fileName))
+      val writer = new PrintWriter(new File("items.json"))
       val json = writePretty(inventory)
       writer.write(json)
       writer.close()
@@ -67,6 +66,7 @@ object Database {
   def readFromJSON(fileName: String): List[Items] = {
     try {
       implicit def formats: DefaultFormats = DefaultFormats
+
       val bufferedSource = Source.fromFile(new File("items.json")).mkString
       read[List[Items]](bufferedSource)
     } catch {
