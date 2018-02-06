@@ -3,7 +3,7 @@ import org.apache.log4j.Logger
 
 import scala.io.StdIn
 
-class Accounts {
+object Accounts {
   val Log = Logger.getLogger(this.getClass)
 
   def addPerson(database: Database): Boolean = {
